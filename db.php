@@ -1,6 +1,5 @@
 <?php
 
-  define( 'DBHOST', 'locahost' );
-  define( 'DBUSER', 'root' );
-  define( 'DBPASS', '' );
-  define( 'DBNAME', 'abtech_db' );
+require_once 'config.php';
+
+$DB = new mysqli( DBHOST, DBUSER, DBPASS, DBNAME );
