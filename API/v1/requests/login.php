@@ -10,4 +10,4 @@ $result = $DB->query( "SELECT * FROM " . PREF_ . "user WHERE username='$username
 
 if( $result ) {
 
-}asdasd
+}
