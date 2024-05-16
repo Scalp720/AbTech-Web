@@ -1,6 +1,6 @@
 <?php
 // notifications.php 
-require_once '../../db.php';
+require_once 'db.php';
 
 function sendNotification($responderId, $alertId, $description, $location) {
     global $DB;

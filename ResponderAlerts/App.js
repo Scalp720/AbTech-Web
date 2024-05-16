@@ -6,13 +6,14 @@ import * as Location from 'expo-location';
 const USER_ID = 1; 
 const RESPONDER_ID = 12;
 
-const BASE_API_URL = 'http://localhost/AbTech-Web/API/v1/request'; // Replace with your actual API URL
+const BASE_API_URL = 'http://192.168.10.242/Abtech-Web/API/v1/requests'; // Replace with your actual API URL
 
 export default function App() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [responderLocation, setResponderLocation] = useState(null); // Add state for responder location
   const mapRef = useRef(null);
+  const [isAlertSent, setIsAlertSent] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -74,6 +75,47 @@ export default function App() {
     }
   };
   //*********************************************************************************88 */
+  // const sendAlert = async () => {
+  //   try {
+  //     const response = await fetch(`${BASE_API_URL}/send_alert.php`, {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({
+  //         user_id: USER_ID,
+  //         latitude: location.coords.latitude,
+  //         longitude: location.coords.longitude,
+  //         location: 'balabago', // Example location
+  //         description: "Emergency" 
+  //       })
+  //     });
+  
+  //     // Check if the response is JSON
+  //     const contentType = response.headers.get('content-type');
+  //     if (contentType && contentType.indexOf('application/json') !== -1) {
+  //       const data = await response.json();
+  //       if (data.success) {
+  //         setIsAlertSent(true);
+  //         alert('Alert sent successfully!');
+  //       } else {
+  //         alert(`Error sending alert: ${data.error}`);
+  //       }
+  //       console.log(data);
+  //       console.log('Response status:', response.status);
+  //       console.log('Response headers:', response.headers);
+  //       console.log('Response body:', await response.text());
+  //     } else {
+  //       const text = await response.text(); // Get the raw text response
+  //       console.error('Unexpected response:', text); // Log for debugging
+  //       throw new Error('Server returned non-JSON response');
+        
+  //     }
+  
+  //   } catch (error) {
+  //     console.error('Error:', error.message); // Log the error message
+  //     alert('Failed to send alert');
+  //   }
+  // };
+
   const sendAlert = async () => {
     try {
       const response = await fetch(`${BASE_API_URL}/send_alert.php`, {
@@ -83,33 +125,33 @@ export default function App() {
           user_id: USER_ID,
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
-          location: "123 Main Street, Anytown", // Example location
+          location: 'Tagaytay, Calabarzon', 
           description: "Emergency" 
         })
       });
-  
+
       // Check if the response is JSON
       const contentType = response.headers.get('content-type');
       if (contentType && contentType.indexOf('application/json') !== -1) {
-        const data = await response.json();
+        const data = await response.json(); // Store parsed data in a variable
         if (data.success) {
           setIsAlertSent(true);
           alert('Alert sent successfully!');
         } else {
           alert(`Error sending alert: ${data.error}`);
         }
-        console.log(data);
+        console.log('Response data:', data); // Log the data object
       } else {
-        const text = await response.text(); // Get the raw text response
-        console.error('Unexpected response:', text); // Log for debugging
+        const text = await response.text(); 
+        console.error('Unexpected response:', text); 
         throw new Error('Server returned non-JSON response');
       }
-  
     } catch (error) {
-      console.error('Error:', error.message); // Log the error message
+      console.error('Error:', error.message); 
       alert('Failed to send alert');
     }
   };
+
 
   let text = 'Waiting..';
   if (errorMsg) {
@@ -134,8 +176,13 @@ export default function App() {
         {responderLocation && <Marker coordinate={responderLocation} title="Responder Location" pinColor="green" />}
       </MapView>
 
-      <Button title="Send Alert" onPress={sendAlert} />
-      <Text style={styles.paragraph}>{text}</Text>
+      {/* <Button title="Send Alert" onPress={sendAlert} />
+      <Text style={styles.paragraph}>{text}</Text> */}
+      {isAlertSent ? (
+  <Text>Alert is being processed...</Text> // UI element when alert is active
+) : (
+  <Button title="Send Alert" onPress={sendAlert} disabled={!location} />
+)}
       
     </View>
   );

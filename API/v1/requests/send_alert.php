@@ -1,9 +1,14 @@
 <?php
 require_once 'db.php';
-require_once 'notifications.php';
+require_once 'notification.php';
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+
+header("Access-Control-Allow-Origin: *"); // Or specify your app's origin
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
@@ -84,7 +89,7 @@ function findNearestResponders($alertLatitude, $alertLongitude, $limit = 3) {
             LIMIT ?";
 
     $stmt = $DB->prepare($sql);
-    $stmt->bind_param("dddi", $alertLatitude, $alertLongitude, $alertLatitude, $radius, $limit);
+    $stmt->bind_param("dddid", $alertLatitude, $alertLongitude, $alertLatitude, $radius, $limit);
     $stmt->execute();
     $result = $stmt->get_result();
 
