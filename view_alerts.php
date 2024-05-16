@@ -91,7 +91,6 @@ $municipalities = $DB->query("SELECT * FROM tb_municipality ORDER BY office_name
 
 <div class="container">
     <h2>View Alerts</h2>
-
     <form method="get" action="">
         <label for="region">Region:</label>
         <select name="region" id="region" onchange="this.form.submit()">  
@@ -128,8 +127,8 @@ $municipalities = $DB->query("SELECT * FROM tb_municipality ORDER BY office_name
         </select>
     </form>
     <?php if ($result && $result->num_rows > 0): ?>
-        <h3>Alerts</h3>
-        <table border="1">
+        <h3 class="alert">Alerts</h3>
+        <table>
             <tr>
                 <th>ID</th>
                 <th>User ID</th>

@@ -1,0 +1,104 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif; /* Choose a font you prefer */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6; /* Adjust line height for better readability */
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: auto;  /* Set a maximum width for your content */
+    margin: 0 auto;     /* Center the container */
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+a {
+    color: #007bff;  /* Blue link color */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #ddd; /* Add a light border */
+}
+
+th {
+    background-color: #aa7c11;
+    color: white;
+}
+
+/* Form Styles */
+form {
+    width: 150px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="password"],
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Error/Success Messages */
+.error, .success {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.error {
+    background-color: #f8d7da; /* Light red */
+    border: 1px solid #f5c6cb;
+}
+
+.success {
+    background-color: #d4edda; /* Light green */
+    border: 1px solid #c3e6cb;
+}
+.alert{
+    font-size: 40px;
+    color: #4CAF50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

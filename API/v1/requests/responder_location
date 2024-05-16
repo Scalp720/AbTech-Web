@@ -1,0 +1,20 @@
+<?php
+require_once '../config/database.php';
+
+if (isset($_GET['user_id'])) {
+    $userId = intval($_GET['user_id']);
+
+    $sql = "SELECT latitude, longitude FROM tb_user WHERE user_id = ?"; // Assuming you store location in tb_user
+    $stmt = $DB->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        echo json_encode(['success' => true, 'location' => $row]);
+    } else {
+        echo json_encode(['error' => 'User not found or location not available']);
+    }
+} else {
+    echo json_encode(['error' => 'Missing user_id parameter']);
+}

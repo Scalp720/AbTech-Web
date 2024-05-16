@@ -1,6 +1,6 @@
 </div>
 </body>
 <footer>
-    <p>&copy; 2023 Your Company Name</p>
+    <p style="text-align: center;">&copy; 2023 Z-Tech</p>
 </footer>
 </html>
