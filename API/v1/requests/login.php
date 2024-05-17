@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $username = $request_data->username;
-    $password = $request_data->password;
+    $password = md5($request_data->password);
 
     // Prepare and execute the SQL query to check if the user exists
     $query = "SELECT * FROM " . PREF_ . "user WHERE username='$username' AND password='$password'";
